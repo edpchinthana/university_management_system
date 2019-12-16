@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package universitymanagementsystem;
-
+import java.sql.*;
 /**
  *
  * @author Pasindu Chinthana
@@ -18,7 +18,9 @@ public class dbConnector extends javax.swing.JFrame {
     static String port = "3306";
     static String dbUsername = "root";
     static String dbPassword = "";
-   
+    static Connection con;
+    static Statement stmt;
+    static ResultSet rs;
     public dbConnector() {
         initComponents();
     }
@@ -64,6 +66,12 @@ public class dbConnector extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setText("Username :");
 
+        jTextField1.setText("localhost");
+
+        jTextField2.setText("3306");
+
+        jTextField3.setText("root");
+
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton1.setText("Test Connection");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -83,7 +91,8 @@ public class dbConnector extends javax.swing.JFrame {
             }
         });
 
-        jLabel6.setText("jLabel6");
+        jLabel6.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -143,9 +152,9 @@ public class dbConnector extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -179,7 +188,8 @@ public class dbConnector extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        checkConnection();
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -187,7 +197,23 @@ public class dbConnector extends javax.swing.JFrame {
         menuObject.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_jButton3ActionPerformed
-
+    private void checkConnection(){
+        String hostStr = jTextField1.getText();
+        String portStr = jTextField2.getText();
+        String usernameStr = jTextField3.getText();
+        String passwordStr = jTextField4.getText();
+        
+        try{
+        Class.forName("com.mysql.jdbc.Driver");
+        con=DriverManager.getConnection("jdbc:mysql://"+hostStr+":"+portStr+"/student_management_system",""+usernameStr+"",""+passwordStr+"");
+        stmt=con.createStatement();
+        stmt.executeQuery("SELECT * FROM student");
+        jLabel6.setText("Successfully connected!");
+        }catch(Exception e){
+            jLabel6.setText("Connection Failed");
+        }
+        
+    }
     /**
      * @param args the command line arguments
      */
