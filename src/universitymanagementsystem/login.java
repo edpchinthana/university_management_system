@@ -183,7 +183,7 @@ public class login extends javax.swing.JFrame {
                           studentMenu smObject = new studentMenu(username,name,telephone);
                           smObject.setVisible(true);
                           setVisible(false);
-                    }else if(count ==1 && role.equals("Lecturer")){
+                    }else if(count==1 && role.equals("Lecturer")){
                         lecturerMenu lmObject = new lecturerMenu(username,name,telephone);
                         lmObject.setVisible(true);
                         setVisible(false);

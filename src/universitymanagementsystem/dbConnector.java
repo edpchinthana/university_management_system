@@ -82,6 +82,11 @@ public class dbConnector extends javax.swing.JFrame {
 
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton2.setText("Save");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton3.setText("Back");
@@ -188,7 +193,7 @@ public class dbConnector extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        checkConnection();
+        boolean check = checkConnection();
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -197,7 +202,20 @@ public class dbConnector extends javax.swing.JFrame {
         menuObject.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_jButton3ActionPerformed
-    private void checkConnection(){
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        boolean check = checkConnection();
+        if(check){
+            host = jTextField1.getText();
+            port = jTextField2.getText();
+            dbUsername = jTextField3.getText();
+            dbPassword= jTextField4.getText();
+            jLabel6.setText("Saved..");
+        }else{
+            jLabel6.setText("Connection failed");
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+    private boolean checkConnection(){
         String hostStr = jTextField1.getText();
         String portStr = jTextField2.getText();
         String usernameStr = jTextField3.getText();
@@ -209,8 +227,10 @@ public class dbConnector extends javax.swing.JFrame {
         stmt=con.createStatement();
         stmt.executeQuery("SELECT * FROM student");
         jLabel6.setText("Successfully connected!");
+        return true;
         }catch(Exception e){
-            jLabel6.setText("Connection Failed");
+            jLabel6.setText("Connection failed");
+            return false;
         }
         
     }
