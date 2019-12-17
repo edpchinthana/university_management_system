@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package universitymanagementsystem;
-
+import java.sql.*;
 /**
  *
  * @author Pasindu Chinthana
@@ -14,8 +14,22 @@ public class studentEditInfo extends javax.swing.JFrame {
     /**
      * Creates new form studentEditInfo
      */
+    String name;
+    String username;
+    String telephone;
+    String password;
+    String id;
     public studentEditInfo() {
         initComponents();
+    }
+    
+    public studentEditInfo(String username, String name, String telephone){
+        this.name = name;
+        this.username = username;
+        this.telephone = telephone;
+        initComponents();
+        importDetails(username);
+        
     }
 
     /**
@@ -72,10 +86,6 @@ public class studentEditInfo extends javax.swing.JFrame {
         jLabel7.setText("Password :");
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-
-        jTextField1.setText("jTextField1");
-
-        jTextField2.setText("jTextField1");
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel9.setToolTipText("");
@@ -147,6 +157,11 @@ public class studentEditInfo extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton1.setText("Save");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton2.setText("Back");
@@ -176,16 +191,44 @@ public class studentEditInfo extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
-                .addContainerGap())
+                .addGap(14, 14, 14))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+    
+    private void importDetails(String username){
+        dbConnection dbcObject = new dbConnection();
+        String query = "Select * from student where username = '"+username+"';";
+        try{
+            ResultSet rs = dbcObject.getResult(query);
+            while(rs.next()){
+                this.username = rs.getString("username");
+                this.name = rs.getString("name");
+                this.password = rs.getString("password");
+                this.telephone = rs.getString("telephone");
+                this.id = rs.getString("id");
+            }
+            jLabel8.setText(this.id);
+            jLabel9.setText(this.username);
+            jTextField1.setText(this.name);
+            jTextField2.setText(this.telephone);
+            jPasswordField1.setText(this.password);
+            jPasswordField2.setText(this.password);
+        }catch(Exception e){
+            System.out.println(e);
+        }
+        
+    }
     /**
      * @param args the command line arguments
      */
