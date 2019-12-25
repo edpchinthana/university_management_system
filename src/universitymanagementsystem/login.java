@@ -63,12 +63,16 @@ public class login extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setText("Password    :");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select", "Lecturer", "Student" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Lecturer", "Student" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
             }
         });
+
+        jTextField1.setText("test");
+
+        jPasswordField1.setText("1234");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
