@@ -23,7 +23,6 @@ public class studentCourses extends javax.swing.JFrame {
        this.name = name;
        this.username = username;
        this.id = id;
-       System.out.println("id = "+id);
        initComponents(); 
        refreshEnrolledTable();
        refreshAvailableTable();
@@ -54,6 +53,8 @@ public class studentCourses extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Student - Courses");
+        setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("Courses");
@@ -272,7 +273,7 @@ public class studentCourses extends javax.swing.JFrame {
 
     private void refreshEnrolledTable(){
         dbConnection dbcObject = new dbConnection();
-        String query = "select * from course, result, lecturer where course.course_code = result.course_code and course.lecturer=lecturer.id and result.student_id='"+id+"'";
+        String query = "select course.course_code, course.course_name, lecturer.name from course, result, lecturer where course.course_code = result.course_code and course.lecturer=lecturer.id and result.student_id='"+id+"'";
         DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
         model.setRowCount(0);
         try{
@@ -287,7 +288,7 @@ public class studentCourses extends javax.swing.JFrame {
     
     private void refreshAvailableTable(){
         dbConnection dbcObject = new dbConnection();
-        String query = "select * from course, result, lecturer where course.course_code = result.course_code and course.lecturer=lecturer.id and result.student_id!='"+id+"'";
+        String query = "select course.course_code, course.course_name, lecturer.name from course, result, lecturer where course.course_code = result.course_code and course.lecturer=lecturer.id and result.student_id!='"+id+"'";
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
         try{
