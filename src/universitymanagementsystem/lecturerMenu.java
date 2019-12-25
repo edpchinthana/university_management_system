@@ -17,14 +17,16 @@ public class lecturerMenu extends javax.swing.JFrame {
     String name;
     String username;
     String telephone;
+    String id;
     public lecturerMenu() {
         initComponents();
     }
-    public lecturerMenu(String username,String name,String telephone){
+    public lecturerMenu(String username,String name,String telephone,String id){
         initComponents();
         this.username = username;
         this.name = name;
         this.telephone=telephone;
+        this.id= id;
         jLabel2.setText(name);
         jLabel3.setText(telephone);
     }

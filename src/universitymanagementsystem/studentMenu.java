@@ -17,14 +17,16 @@ public class studentMenu extends javax.swing.JFrame {
     String name;
     String username;
     String telephone;
+    String id;
     public studentMenu() {
         initComponents();
         
     }
-    public studentMenu(String username , String name, String telephone){
+    public studentMenu(String username , String name, String telephone,String id){
         this.username = username;
         this.name = name;
         this.telephone = telephone;
+        this.id=id;
         initComponents();
         jLabel2.setText(name);
         jLabel3.setText(telephone);
@@ -145,7 +147,7 @@ public class studentMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        studentCourses scObject = new studentCourses();
+        studentCourses scObject = new studentCourses(username,name,id);
         scObject.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
