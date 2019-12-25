@@ -35,8 +35,8 @@ public class dbConnection {
         try{
             Class.forName("com.mysql.jdbc.Driver");
             con=DriverManager.getConnection("jdbc:mysql://"+dbConnector.host+":"+dbConnector.port+"/university_management_system",""+dbConnector.dbUsername+"",""+dbConnector.dbPassword+"");
-            stmt=con.createStatement();
-            stmt.executeUpdate(query);   
+            PreparedStatement preparedStmt = con.prepareStatement(query);
+            preparedStmt.execute();
         }catch(Exception e){
         System.out.println("InsertResult Error : "+e);
         }
