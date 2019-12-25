@@ -5,6 +5,9 @@
  */
 package universitymanagementsystem;
 
+import java.sql.ResultSet;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Pasindu Chinthana
@@ -25,6 +28,7 @@ public class lecturerSummary extends javax.swing.JFrame {
         this.id = id;
         this.course_code =  course_code;
         initComponents();
+        refreshTable();
         jLabel1.setText(jLabel1.getText()+" "+course_code);
     }
 
@@ -43,7 +47,8 @@ public class lecturerSummary extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Lecturer - Courses - Summary");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("Summary - ");
@@ -136,12 +141,27 @@ public class lecturerSummary extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void refreshTable(){
+        dbConnection dbcObject = new dbConnection();
+        String query = "SELECT student.id, student.name, result.result, result.grade from student, result where result.student_id=student.id and result.course_code = '"+course_code+"'";
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+        try{
+            ResultSet rs = dbcObject.getResult(query);
+            while(rs.next()){
+               model.addRow(new Object[]{rs.getString("id"), rs.getString("name"), rs.getString("result"), rs.getString("grade")});
+            }
+        }catch(Exception e){
+            System.out.println("Error\n "+e);
+        }
+    }
     /**
      * @param args the command line arguments
      */
