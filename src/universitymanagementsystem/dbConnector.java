@@ -50,6 +50,7 @@ public class dbConnector extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("DB Connector");
         setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -224,10 +225,11 @@ public class dbConnector extends javax.swing.JFrame {
         
         try{
         Class.forName("com.mysql.jdbc.Driver");
-        con=DriverManager.getConnection("jdbc:mysql://"+hostStr+":"+portStr+"/student_management_system",""+usernameStr+"",""+passwordStr+"");
+        con=DriverManager.getConnection("jdbc:mysql://"+hostStr+":"+portStr+"/university_management_system2",""+usernameStr+"",""+passwordStr+"");
         stmt=con.createStatement();
-        stmt.executeQuery("SELECT * FROM student");
+        rs = stmt.executeQuery("SELECT * FROM student");
         jLabel6.setText("Successfully connected!");
+        con.close();
         return true;
         }catch(Exception e){
             jLabel6.setText("Connection failed");

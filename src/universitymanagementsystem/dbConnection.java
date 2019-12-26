@@ -21,7 +21,7 @@ public class dbConnection {
         rs=null;
         try{
             Class.forName("com.mysql.jdbc.Driver");
-            con=DriverManager.getConnection("jdbc:mysql://"+dbConnector.host+":"+dbConnector.port+"/university_management_system",""+dbConnector.dbUsername+"",""+dbConnector.dbPassword+"");
+            con=DriverManager.getConnection("jdbc:mysql://"+dbConnector.host+":"+dbConnector.port+"/university_management_system2",""+dbConnector.dbUsername+"",""+dbConnector.dbPassword+"");
             stmt=con.createStatement();
             rs=stmt.executeQuery(query);  
         }catch(Exception e){
@@ -34,7 +34,7 @@ public class dbConnection {
         
         try{
             Class.forName("com.mysql.jdbc.Driver");
-            con=DriverManager.getConnection("jdbc:mysql://"+dbConnector.host+":"+dbConnector.port+"/university_management_system",""+dbConnector.dbUsername+"",""+dbConnector.dbPassword+"");
+            con=DriverManager.getConnection("jdbc:mysql://"+dbConnector.host+":"+dbConnector.port+"/university_management_system2",""+dbConnector.dbUsername+"",""+dbConnector.dbPassword+"");
             PreparedStatement preparedStmt = con.prepareStatement(query);
             preparedStmt.execute();
         }catch(Exception e){

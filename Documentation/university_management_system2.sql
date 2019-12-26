@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 26, 2019 at 06:37 AM
+-- Generation Time: Dec 26, 2019 at 08:29 AM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.1.32
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `university_management_system`
+-- Database: `university_management_system2`
 --
 
 -- --------------------------------------------------------
@@ -27,8 +27,21 @@ SET time_zone = "+00:00";
 --
 -- Table structure for table `course`
 --
--- Error reading structure for table university_management_system.course: #1932 - Table 'university_management_system.course' doesn't exist in engine
--- Error reading data for table university_management_system.course: #1064 - You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'FROM `university_management_system`.`course`' at line 1
+
+CREATE TABLE `course` (
+  `course_code` varchar(10) NOT NULL,
+  `course_name` varchar(30) NOT NULL,
+  `lecturer` varchar(10) NOT NULL,
+  `credit` int(5) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `course`
+--
+
+INSERT INTO `course` (`course_code`, `course_name`, `lecturer`, `credit`) VALUES
+('SENG11243', 'Statistics', 'lec001', 3),
+('SENG12223', 'Object Oriented Programming', 'lec002', 3);
 
 -- --------------------------------------------------------
 
@@ -39,19 +52,18 @@ SET time_zone = "+00:00";
 CREATE TABLE `lecturer` (
   `id` varchar(10) NOT NULL,
   `name` varchar(30) NOT NULL,
-  `telephone` varchar(10) NOT NULL,
   `username` varchar(30) NOT NULL,
-  `password` varchar(30) NOT NULL
+  `password` varchar(30) NOT NULL,
+  `telephone` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `lecturer`
 --
 
-INSERT INTO `lecturer` (`id`, `name`, `telephone`, `username`, `password`) VALUES
-('lec001', 'Dr. Nalin Warnajith', '0711111111', 'nwarnajith', '1234'),
-('lec002', 'Dr. Lankeshwara Munasinghe', '0711111111', 'lmunasinghe', '1234'),
-('lec003', 'test', '0123456789', 'test', '1234');
+INSERT INTO `lecturer` (`id`, `name`, `username`, `password`, `telephone`) VALUES
+('lec001', 'Dr. Nalin Warnajith', 'nwarnajith', '1234', '0711234567'),
+('lec002', 'Dr. Lankeshwara Munasinghe', 'lmunasinghe', '1234', '0711234567');
 
 -- --------------------------------------------------------
 
@@ -71,10 +83,8 @@ CREATE TABLE `result` (
 --
 
 INSERT INTO `result` (`course_code`, `student_id`, `result`, `grade`) VALUES
-('SENG11232', 'stu001', 0, ''),
-('SENG11232', 'stu002', 0, ''),
-('SENG12332', 'stu001', 0, '-'),
-('SENG22222', 'stu001', 0, '-');
+('SENG11243', 'stu001', 0, '-'),
+('SENG12223', 'stu001', 0, '-');
 
 -- --------------------------------------------------------
 
@@ -85,22 +95,29 @@ INSERT INTO `result` (`course_code`, `student_id`, `result`, `grade`) VALUES
 CREATE TABLE `student` (
   `id` varchar(10) NOT NULL,
   `name` varchar(30) NOT NULL,
-  `telephone` varchar(10) NOT NULL,
   `username` varchar(30) NOT NULL,
-  `password` varchar(30) NOT NULL
+  `password` varchar(30) NOT NULL,
+  `telephone` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `student`
 --
 
-INSERT INTO `student` (`id`, `name`, `telephone`, `username`, `password`) VALUES
-('stu001', 'Pasindu Chinthana', '0714264346', 'pasindu', '1234'),
-('stu002', 'Sunanda Karunajeewa', '0711234567', 'sunanda', '1234');
+INSERT INTO `student` (`id`, `name`, `username`, `password`, `telephone`) VALUES
+('stu001', 'Pasindu Chinthana', 'pasindu', '1234', '0714264346'),
+('stu002', 'Sunanda Karunajeewa', 'sunanda', '1234', '0711234567');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `course`
+--
+ALTER TABLE `course`
+  ADD PRIMARY KEY (`course_code`),
+  ADD KEY `lecturer` (`lecturer`);
 
 --
 -- Indexes for table `lecturer`
@@ -124,6 +141,12 @@ ALTER TABLE `student`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `course`
+--
+ALTER TABLE `course`
+  ADD CONSTRAINT `course_ibfk_1` FOREIGN KEY (`lecturer`) REFERENCES `lecturer` (`id`);
 
 --
 -- Constraints for table `result`
