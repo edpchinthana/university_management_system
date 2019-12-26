@@ -5,6 +5,7 @@
  */
 package universitymanagementsystem;
 import java.sql.*;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 /**
@@ -466,6 +467,8 @@ public class studentCourses extends javax.swing.JFrame {
             refreshEnrolledTable();
         }catch(Exception e){
             System.out.println(e);
+            JFrame f = new JFrame();
+            JOptionPane.showMessageDialog(f,"You have already registered for "+course_code+"\nError : "+e); 
         }
     }
     /**
