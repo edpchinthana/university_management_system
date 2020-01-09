@@ -7,6 +7,8 @@ package universitymanagementsystem;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 /**
  *
  * @author chinthan_se17004
@@ -63,14 +65,14 @@ public class login extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setText("Password    :");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Lecturer", "Student" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Student", "Lecturer", "Student", "Admin" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
             }
         });
 
-        jTextField1.setText("test");
+        jTextField1.setText("pasindu");
 
         jPasswordField1.setText("1234");
 
@@ -207,6 +209,13 @@ public class login extends javax.swing.JFrame {
                         lecturerMenu lmObject = new lecturerMenu(username,name,telephone,id);
                         lmObject.setVisible(true);
                         setVisible(false);
+                    }else if(count==1 && role.equals("Admin")){
+                        adminMenu amObject = new adminMenu(username,name,telephone,id);
+                        amObject.setVisible(true);
+                        setVisible(false);
+                    }else{
+                        JFrame f = new JFrame();
+                        JOptionPane.showMessageDialog(f,"Incorrect Username or Password"); 
                     }
                 } catch (SQLException ex) {
                     System.out.println(ex);

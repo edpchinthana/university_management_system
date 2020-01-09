@@ -165,9 +165,11 @@
         <Component class="javax.swing.JComboBox" name="jComboBox1">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="2">
-                <StringItem index="0" value="Lecturer"/>
-                <StringItem index="1" value="Student"/>
+              <StringArray count="4">
+                <StringItem index="0" value="Student"/>
+                <StringItem index="1" value="Lecturer"/>
+                <StringItem index="2" value="Student"/>
+                <StringItem index="3" value="Admin"/>
               </StringArray>
             </Property>
           </Properties>
@@ -180,7 +182,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="jTextField1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="test"/>
+            <Property name="text" type="java.lang.String" value="pasindu"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JPasswordField" name="jPasswordField1">
