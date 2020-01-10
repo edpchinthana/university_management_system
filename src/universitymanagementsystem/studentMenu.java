@@ -181,6 +181,7 @@ public class studentMenu extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         studentEditInfo seiObject = new studentEditInfo(username,name,telephone);
         seiObject.setVisible(true);
+        dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -197,7 +198,16 @@ public class studentMenu extends javax.swing.JFrame {
         studentLecturers slObject = new studentLecturers();
         slObject.setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
-
+    public void refresh(String username, String name, String telephone, String id){
+        jLabel2.setText(name);
+        jLabel3.setText(telephone);
+        this.username = username;
+        this.name = name;
+        this.telephone = telephone;
+        this.id = id;
+    }
+        
+    
     /**
      * @param args the command line arguments
      */

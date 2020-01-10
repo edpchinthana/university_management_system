@@ -5,6 +5,8 @@
  */
 package universitymanagementsystem;
 import java.sql.*;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Pasindu Chinthana
@@ -25,7 +27,8 @@ public class dbConnection {
             stmt=con.createStatement();
             rs=stmt.executeQuery(query);  
         }catch(Exception e){
-        System.out.println("GetResult Error : "+e);
+        JFrame f = new JFrame();
+        JOptionPane.showMessageDialog(f,"Error\n"+e); 
         }
         return rs;
     }
@@ -38,7 +41,8 @@ public class dbConnection {
             PreparedStatement preparedStmt = con.prepareStatement(query);
             preparedStmt.execute();
         }catch(Exception e){
-        System.out.println("InsertResult Error : "+e);
+        JFrame f = new JFrame();
+        JOptionPane.showMessageDialog(f,"Error\n"+e); 
         }
         
     }
