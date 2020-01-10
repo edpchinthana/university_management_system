@@ -6,6 +6,7 @@
 package universitymanagementsystem;
 
 import java.sql.ResultSet;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -165,10 +166,16 @@ public class lecturerCourses extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        int row = jTable1.getSelectedRow();
+    int row = jTable1.getSelectedRow();
+        if(row==-1){
+            JFrame f = new JFrame();
+            JOptionPane.showMessageDialog(f,"Select a course to continue"); 
+        }else{
             String course_code = jTable1.getModel().getValueAt(row, 0).toString();  
             lecturerSummary lsObject = new lecturerSummary(username, id, course_code);
             lsObject.setVisible(true);
+        }
+            
     }//GEN-LAST:event_jButton1ActionPerformed
     
     private void refreshTable(){
