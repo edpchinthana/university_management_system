@@ -184,12 +184,12 @@ public class login extends javax.swing.JFrame {
         String telephone="";
         String id="";
         //System.out.println("\n\nRole :"+role+"\nUsername : "+username+"\nPassword :"+password);
-        
+        JFrame f = new JFrame();
         if(role.equals("Select")){
-            jLabel5.setText("Select your role");
+            JOptionPane.showMessageDialog(f,"Select your role");
         }else{
             if(username.equals("")||password.equals("")){
-                jLabel5.setText("Check fields");
+                JOptionPane.showMessageDialog(f,"Check fields");
             }else{
                 jLabel5.setText("");
                 String query = "Select * from "+role+" where username='"+username+"' and password = '"+password+"';";
@@ -215,7 +215,7 @@ public class login extends javax.swing.JFrame {
                         amObject.setVisible(true);
                         setVisible(false);
                     }else{
-                        JFrame f = new JFrame();
+                        
                         JOptionPane.showMessageDialog(f,"Incorrect Username or Password"); 
                     }
                 } catch (SQLException ex) {

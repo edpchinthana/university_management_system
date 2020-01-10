@@ -5,6 +5,8 @@
  */
 package universitymanagementsystem;
 import java.sql.*;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Pasindu Chinthana
@@ -56,6 +58,7 @@ public class lecturerEditInfo extends javax.swing.JFrame {
         jPasswordField1 = new javax.swing.JPasswordField();
         jPasswordField2 = new javax.swing.JPasswordField();
         jButton1 = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Lecturer - Edit Info");
@@ -167,6 +170,9 @@ public class lecturerEditInfo extends javax.swing.JFrame {
             }
         });
 
+        jLabel10.setForeground(new java.awt.Color(153, 0, 0));
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -180,6 +186,8 @@ public class lecturerEditInfo extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1)))
@@ -195,7 +203,8 @@ public class lecturerEditInfo extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(jButton2)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(14, 14, 14))
         );
 
@@ -208,7 +217,36 @@ public class lecturerEditInfo extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        jLabel10.setText(""); 
+        String password1 = String.valueOf(jPasswordField1.getPassword());
+         String password2 = String.valueOf(jPasswordField2.getPassword());
+         String name = jTextField1.getText();
+         String telephone = jTextField2.getText();
+         
+         if(name.equals("")||telephone.equals("")||password1.equals("")||password2.equals("")){
+             jLabel10.setText("Check all fields..");
+         }else if(!password1.equals(password2)){
+             jLabel10.setText("Passwords weren't matched..");
+         }else{
+            int dialogButton = JOptionPane.YES_NO_OPTION;
+            int dialogResult = JOptionPane.showConfirmDialog(this, "Are you really want to save changes?", "Warning", dialogButton);
+            if(dialogResult == 0) {
+                String query = "UPDATE Lecturer SET name = '"+name+"' , telephone = '"+telephone+"' , password = '"+password1+"' WHERE id ='"+this.id+"';";
+                dbConnection dbcObject = new dbConnection();
+                try{
+                    dbcObject.insertResult(query);
+                    importDetails(this.username);
+                    lecturerMenu lmObject = new lecturerMenu(username,name,telephone,id);
+                    lmObject.setVisible(true);
+                    dispose();
+                }catch(Exception e){
+                    JFrame f = new JFrame();
+                    JOptionPane.showMessageDialog(f,"Error\n"+e); 
+                }
+            } else {
+                 
+            } 
+         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void importDetails(String username){
@@ -273,6 +311,7 @@ public class lecturerEditInfo extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
