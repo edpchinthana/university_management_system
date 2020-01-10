@@ -219,7 +219,7 @@ public class login extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(f,"Incorrect Username or Password"); 
                     }
                 } catch (SQLException ex) {
-                    System.out.println(ex);
+                    JOptionPane.showMessageDialog(f,"Error\n"+ex); 
                 }
             }
         }
