@@ -6,6 +6,8 @@
 package universitymanagementsystem;
 
 import java.sql.ResultSet;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -97,10 +99,11 @@ public class studentLecturers extends javax.swing.JFrame {
                     .addComponent(jButton5)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton2)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jRadioButton2)
+                        .addComponent(jRadioButton1)))
                 .addGap(6, 6, 6))
         );
 
@@ -242,7 +245,8 @@ public class studentLecturers extends javax.swing.JFrame {
                 model.addRow(new Object[]{rs.getString("id"), rs.getString("name"), rs.getString("telephone")});
             }
         }catch(Exception e){
-            System.out.println(e);
+            JFrame f = new JFrame();
+            JOptionPane.showMessageDialog(f,"Error\n"+e); 
         }
         
         
@@ -259,7 +263,8 @@ public class studentLecturers extends javax.swing.JFrame {
                model.addRow(new Object[]{rs.getString("id"), rs.getString("name"), rs.getString("telephone")});
             }
         }catch(Exception e){
-            System.out.println("Error\n "+e);
+            JFrame f = new JFrame();
+            JOptionPane.showMessageDialog(f,"Error\n"+e); 
         }
     }
     

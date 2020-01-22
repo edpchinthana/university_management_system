@@ -268,7 +268,8 @@ public class lecturerEditInfo extends javax.swing.JFrame {
             jPasswordField1.setText(this.password);
             jPasswordField2.setText(this.password);
         }catch(Exception e){
-            System.out.println(e);
+            JFrame f = new JFrame();
+            JOptionPane.showMessageDialog(f,"Error\n"+e); 
         }
         
     }

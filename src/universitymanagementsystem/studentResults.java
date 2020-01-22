@@ -6,6 +6,8 @@
 package universitymanagementsystem;
 
 import java.sql.ResultSet;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -115,11 +117,12 @@ public class studentResults extends javax.swing.JFrame {
                     .addComponent(jButton5)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton3)
-                    .addComponent(jRadioButton2)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jRadioButton3)
+                        .addComponent(jRadioButton2)
+                        .addComponent(jRadioButton1)))
                 .addContainerGap())
         );
 
@@ -227,17 +230,24 @@ public class studentResults extends javax.swing.JFrame {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         String keyword ="";
         int check=0;
-        if(jRadioButton1.isSelected()){
-            check = 1;
-        }else if(jRadioButton2.isSelected()){
-            check = 2;
-        }else if(jRadioButton3.isSelected()){
-            check = 3;
-        }else{
-            jLabel5.setText("Select the column");
-        }
         keyword=jTextField1.getText();
-        searchCourses(keyword,check);
+        if(keyword.equals("")){
+            JFrame f = new JFrame();
+            JOptionPane.showMessageDialog(f,"Enter a keyword to search"); 
+        }else{
+            if(jRadioButton1.isSelected()){
+                check = 1;
+            }else if(jRadioButton2.isSelected()){
+                 check = 2;
+             }else if(jRadioButton3.isSelected()){
+                    check = 3;
+            }else if(check==0){ 
+                JFrame f = new JFrame();
+            JOptionPane.showMessageDialog(f,"Select a column to search"); 
+        }else if(check!=0){
+            searchCourses(keyword,check);
+        }
+        }
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -252,10 +262,11 @@ public class studentResults extends javax.swing.JFrame {
         try{
             ResultSet rs = dbcObject.getResult(query);
             while(rs.next()){
-               model.addRow(new Object[]{rs.getString("course_code"), rs.getString("course_name"), rs.getString("name")});
+               model.addRow(new Object[]{rs.getString("course_code"), rs.getString("course_name"), rs.getString("name"),rs.getString("grade")});
             }
         }catch(Exception e){
-            System.out.println("Error\n "+e);
+            JFrame f = new JFrame();
+            JOptionPane.showMessageDialog(f,"Error\n"+e); 
         }
     }
     
@@ -281,7 +292,8 @@ public class studentResults extends javax.swing.JFrame {
                 model.addRow(new Object[]{rs.getString("course_code"), rs.getString("course_name"), rs.getString("name")});
             }
         }catch(Exception e){
-            System.out.println(e);
+            JFrame f = new JFrame();
+            JOptionPane.showMessageDialog(f,"Error\n"+e); 
         }
         
         

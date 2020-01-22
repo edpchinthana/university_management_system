@@ -340,16 +340,21 @@ public class studentCourses extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
             int row = jTable1.getSelectedRow();
-            System.out.println("Row is selected : "+row);
-            String course_code = jTable1.getModel().getValueAt(row, 0).toString();  
-            System.out.println(course_code);
-            int dialogButton = JOptionPane.YES_NO_OPTION;
-            int dialogResult = JOptionPane.showConfirmDialog(this, "Are you really want to enroll from "+course_code, "Warning", dialogButton);
-            if(dialogResult == 0) {
-                enroll(course_code);
-            } else {
-                 
+            //System.out.println("Row is selected : "+row);
+            if(!jTable1.getSelectionModel().isSelectionEmpty()){
+                String course_code = jTable1.getModel().getValueAt(row, 0).toString();
+                int dialogButton = JOptionPane.YES_NO_OPTION;
+                int dialogResult = JOptionPane.showConfirmDialog(this, "Are you really want to enroll from "+course_code, "Warning", dialogButton);
+                if(dialogResult == 0) {
+                    enroll(course_code);
+                } else { 
+                }
+            }else{
+                JFrame f = new JFrame();
+                JOptionPane.showMessageDialog(f,"Select a row first"); 
             }
+            
+            
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -376,16 +381,22 @@ public class studentCourses extends javax.swing.JFrame {
        
             //DefaultTableModel model = new (DefaultTableModel)jTable2.get
             int row = jTable2.getSelectedRow();
-            System.out.println("Row is selected : "+row);
-            String course_code = jTable2.getModel().getValueAt(row, 0).toString();  
-            System.out.println(course_code);
-            int dialogButton = JOptionPane.YES_NO_OPTION;
-            int dialogResult = JOptionPane.showConfirmDialog(this, "Are you really want to unenroll from "+course_code, "Warning", dialogButton);
-            if(dialogResult == 0) {
-                unenroll(course_code);
-            } else {
+            //System.out.println("Row is selected : "+row);
+            if(!jTable2.getSelectionModel().isSelectionEmpty()){
+                String course_code = jTable2.getModel().getValueAt(row, 0).toString();  
+                System.out.println(course_code);
+                int dialogButton = JOptionPane.YES_NO_OPTION;
+                int dialogResult = JOptionPane.showConfirmDialog(this, "Are you really want to unenroll from "+course_code, "Warning", dialogButton);
+                if(dialogResult == 0) {
+                    unenroll(course_code);
+                } else {
                  
-            } 
+                }
+            }else{
+                JFrame f = new JFrame();
+                JOptionPane.showMessageDialog(f,"Select a course first"); 
+            }
+             
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -400,7 +411,8 @@ public class studentCourses extends javax.swing.JFrame {
                model.addRow(new Object[]{rs.getString("course_code"), rs.getString("course_name"), rs.getString("name")});
             }
         }catch(Exception e){
-            System.out.println("Error\n "+e);
+            JFrame f = new JFrame();
+            JOptionPane.showMessageDialog(f,"Error\n"+e); 
         }
     }
     
@@ -415,7 +427,8 @@ public class studentCourses extends javax.swing.JFrame {
                model.addRow(new Object[]{rs.getString("course_code"), rs.getString("course_name"), rs.getString("name")});
             }
         }catch(Exception e){
-            System.out.println("Error\n "+e);
+            JFrame f = new JFrame();
+            JOptionPane.showMessageDialog(f,"Error\n"+e); 
         }
     }
     
@@ -441,7 +454,8 @@ public class studentCourses extends javax.swing.JFrame {
                 model.addRow(new Object[]{rs.getString("course_code"), rs.getString("course_name"), rs.getString("name")});
             }
         }catch(Exception e){
-            System.out.println(e);
+            JFrame f = new JFrame();
+            JOptionPane.showMessageDialog(f,"Error\n"+e); 
         }
         
         
@@ -454,7 +468,8 @@ public class studentCourses extends javax.swing.JFrame {
             dbcObject.insertResult(query);
             refreshEnrolledTable();
         }catch(Exception e){
-            System.out.println(e);
+            JFrame f = new JFrame();
+            JOptionPane.showMessageDialog(f,"Error\n"+e); 
         }
         refreshEnrolledTable();
     }

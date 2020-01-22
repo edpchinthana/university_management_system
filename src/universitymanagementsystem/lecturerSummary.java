@@ -6,6 +6,8 @@
 package universitymanagementsystem;
 
 import java.sql.ResultSet;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -159,7 +161,8 @@ public class lecturerSummary extends javax.swing.JFrame {
                model.addRow(new Object[]{rs.getString("id"), rs.getString("name"), rs.getString("result"), rs.getString("grade")});
             }
         }catch(Exception e){
-            System.out.println("Error\n "+e);
+            JFrame f = new JFrame();
+            JOptionPane.showMessageDialog(f,"Error\n"+e); 
         }
     }
     /**
